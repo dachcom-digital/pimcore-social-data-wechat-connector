@@ -2,7 +2,7 @@
 
 This Connector allows you to fetch social posts from WeChat. 
 
-![Image](https://user-images.githubusercontent.com/7426193/95994379-83f4a700-0e30-11eb-9aad-e85e3ff4853e.png)
+![Image](https://user-images.githubusercontent.com/7426193/95995174-712ea200-0e31-11eb-88a0-933e622759f6.png)
 
 #### Requirements
 * [Pimcore Social Data Bundle](https://github.com/dachcom-digital/pimcore-social-data)
