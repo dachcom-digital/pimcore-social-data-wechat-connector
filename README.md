@@ -61,9 +61,11 @@ Now head back to the backend (`System` => `Social Data` => `Connector Configurat
 - Click `Connect`
   
 ## Connection
-![Image](https://user-images.githubusercontent.com/7426193/95994459-9f5fb200-0e30-11eb-89ec-8d83b3e15f09.png)
+![image](https://user-images.githubusercontent.com/700119/95068621-d1249a80-0705-11eb-8ebb-b3b15e5e832f.png)
 
-This will generate an access token.
+After hitting the "Connect" button, **a popup** will open and generate an access token.
+If everything worked out fine, the connection setup is complete after the popup closes.
+Otherwise, you'll receive an error message. You may then need to repeat the connection step.
 
 ## Feed Configuration
 
