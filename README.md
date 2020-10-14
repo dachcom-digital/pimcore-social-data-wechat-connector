@@ -52,7 +52,7 @@ social_data:
 ```
 
 ## Connector Configuration
-![image](https://user-images.githubusercontent.com/700119/94451768-164d4780-01af-11eb-9e52-3132ea02d714.png)
+![Image](https://user-images.githubusercontent.com/7426193/95994379-83f4a700-0e30-11eb-9aad-e85e3ff4853e.png)
 
 Now head back to the backend (`System` => `Social Data` => `Connector Configuration`) and checkout the wechat tab.
 - Click on `Install`
@@ -61,7 +61,7 @@ Now head back to the backend (`System` => `Social Data` => `Connector Configurat
 - Click `Connect`
   
 ## Connection
-![image](![Image](https://user-images.githubusercontent.com/7426193/95994459-9f5fb200-0e30-11eb-89ec-8d83b3e15f09.png)
+![Image](https://user-images.githubusercontent.com/7426193/95994459-9f5fb200-0e30-11eb-89ec-8d83b3e15f09.png)
 
 This will generate an access token.
 
