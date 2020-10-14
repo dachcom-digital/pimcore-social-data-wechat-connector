@@ -1,0 +1,5 @@
+social_data.connector.wechat.connect: 'Verbinden'
+social_data.connector.wechat.connect_service: 'WeChat Connect Service'
+social_data.connector.wechat.connect_service_note: 'Sie müssen eine Verbindung zu dieser Anwendung herstellen. Klicken Sie auf "Verbinden" um den Authentifizierungsprozess zu starten.'
+social_data.connector.wechat.token_expiring_date: 'Ablaufdatum des Tokens'
+social_data.wall.feed.wechat.count: 'Anzahl'

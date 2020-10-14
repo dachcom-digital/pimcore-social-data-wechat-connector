@@ -1,0 +1,40 @@
+services:
+
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    ## Definition
+
+    SocialData\Connector\WeChat\Definition\ConnectorDefinition:
+        tags:
+            - {
+                name: social_data.connector_definition,
+                identifier: wechat,
+                socialPostBuilder: SocialData\Connector\WeChat\Builder\SocialPostBuilder
+            }
+
+    ## Social Post Builder
+
+    SocialData\Connector\WeChat\Builder\SocialPostBuilder: ~
+
+    ## API
+
+    SocialData\Connector\WeChat\Client\WeChatClient: ~
+
+    ## Form
+
+    SocialData\Connector\WeChat\Form\Admin\Type\WeChatEngineType:
+        tags:
+            - { name: form.type }
+
+    SocialData\Connector\WeChat\Form\Admin\Type\WeChatFeedType:
+        tags:
+            - { name: form.type }
+
+    ## Controller
+
+    SocialData\Connector\WeChat\Controller\Admin\WeChatController:
+        calls:
+            - [setContainer, ['@service_container']]

@@ -1,0 +1,42 @@
+{
+    "name": "dachcom-digital/social-data-wechat-connector",
+    "type": "pimcore-social-data-connector-bundle",
+    "license": "GPL-3.0-or-later",
+    "description": "Pimcore Social Data WeChat Connector",
+    "keywords": [
+        "pimcore",
+        "social",
+        "feed",
+        "social wall",
+        "wechat"
+    ],
+    "homepage": "https://github.com/dachcom-digital/pimcore-social-data-wechat-connector",
+    "authors": [
+        {
+            "name": "DACHCOM.DIGITAL Pascal Moser",
+            "email": "pmoser@dachcom.ch",
+            "homepage": "http://www.dachcom.com/",
+            "role": "Developer"
+        },
+        {
+            "name": "DACHCOM.DIGITAL Stefan Hagspiel",
+            "email": "shagspiel@dachcom.ch",
+            "homepage": "http://www.dachcom.com/",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SocialData\\Connector\\WeChat\\": "src"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "require": {
+        "dachcom-digital/social-data": "^1.0",
+        "garbetjie/wechat": "^0.10.3"
+    }
+}
