@@ -12,8 +12,7 @@ This Connector allows you to fetch social posts from WeChat.
 ### I. Add Dependencies
 ```json
 "require" : {
-    "dachcom-digital/social-data-wechat-connector" : "~1.0.0",
-    "garbetjie/wechat": "^0.10.3"
+    "dachcom-digital/social-data-wechat-connector" : "~1.0.0"
 }
 ```
 
