@@ -60,7 +60,7 @@ Now head back to the backend (`System` => `Social Data` => `Connector Configurat
 - Click `Connect`
   
 ## Connection
-![image](https://user-images.githubusercontent.com/700119/95068621-d1249a80-0705-11eb-8ebb-b3b15e5e832f.png)
+![image](https://user-images.githubusercontent.com/7426193/96002411-5e1fd000-0e39-11eb-9000-1f939cedf6af.png)
 
 After hitting the "Connect" button, **a popup** will open and generate an access token.
 If everything worked out fine, the connection setup is complete after the popup closes.
