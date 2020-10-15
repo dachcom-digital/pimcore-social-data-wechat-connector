@@ -192,9 +192,13 @@ class SocialPostBuilder implements SocialPostBuilderInterface
         if (!$feedConfiguration instanceof FeedConfiguration) {
             return;
         }
-
+        
         if ($element['date'] instanceof \DateTimeImmutable) {
-            $creationTime = Carbon::createFromImmutable($element['date']);
+            try {
+                $creationTime = new Carbon($element['date']);
+            } catch (\Exception $e) {
+                $creationTime = Carbon::now();
+            }
         } else {
             $creationTime = Carbon::now();
         }
