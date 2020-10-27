@@ -12,6 +12,10 @@ class FeedConfiguration implements ConnectorFeedConfigurationInterface
      */
     protected $count;
 
+    /**
+     * @var bool|null
+     */
+    protected $subPosts;
 
     /**
      * {@inheritdoc}
@@ -35,5 +39,21 @@ class FeedConfiguration implements ConnectorFeedConfigurationInterface
     public function getCount()
     {
         return $this->count;
+    }
+
+    /**
+     * @param bool|null $subPosts
+     */
+    public function setSubPosts(?bool $subPosts)
+    {
+        $this->subPosts = $subPosts;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getSubPosts()
+    {
+        return $this->subPosts;
     }
 }

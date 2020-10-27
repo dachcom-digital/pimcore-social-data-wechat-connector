@@ -32,6 +32,17 @@ SocialData.Feed.Wechat = Class.create(SocialData.Feed.AbstractFeed, {
                 anchor: '100%',
                 flex: 1
             },
+            {
+                xtype: 'checkbox',
+                value: this.data !== null ? this.data['subPosts'] : false,
+                fieldLabel: t('social_data.wall.feed.wechat.sub_posts'),
+                name: 'subPosts',
+                labelAlign: 'left',
+                anchor: '100%',
+                flex: 1,
+                inputValue: true,
+                uncheckedValue: false
+            }
         );
 
         return fields;

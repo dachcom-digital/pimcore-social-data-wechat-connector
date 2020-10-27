@@ -34,7 +34,8 @@ class SocialPostBuilder implements SocialPostBuilderInterface
     protected $logger;
 
     /**
-     * @param WeChatClient $weChatClient
+     * @param WeChatClient    $weChatClient
+     * @param LoggerInterface $logger
      */
     public function __construct(
         WeChatClient $weChatClient,
@@ -58,7 +59,6 @@ class SocialPostBuilder implements SocialPostBuilderInterface
      */
     public function fetch(FetchData $data): void
     {
-        $options = $data->getOptions();
         $buildConfig = $data->getBuildConfig();
 
         $engineConfiguration = $buildConfig->getEngineConfiguration();
@@ -74,8 +74,13 @@ class SocialPostBuilder implements SocialPostBuilderInterface
 
         $paginationList = [];
         $count = $feedConfiguration->getCount();
+        $withSubPosts = $feedConfiguration->getSubPosts();
 
-        $mediaService = $this->weChatClient->getMediaServiceClient($engineConfiguration);
+        try {
+            $mediaService = $this->weChatClient->getMediaServiceClient($engineConfiguration);
+        } catch (\Throwable $e) {
+            throw new BuildException(sprintf('media service client error: %s', $e->getMessage()));
+        }
 
         $countPagination = (int)ceil($count / self::DEFAULT_COUNT);
 
@@ -84,13 +89,19 @@ class SocialPostBuilder implements SocialPostBuilderInterface
             try {
                 $newsMaterial = $mediaService->paginateNews(self::DEFAULT_COUNT * $i, self::DEFAULT_COUNT);
             } catch (\Throwable $e) {
-                throw new BuildException(sprintf('wechat api error: %s', $e->getMessage()));
+                throw new BuildException(sprintf('error while fetching paginated news: %s', $e->getMessage()));
             }
 
             foreach ($newsMaterial->getItems() as $newsItem) {
 
+                $itemCount = 1;
+
                 /** @var Media\Paginated\NewsItem $item */
-                foreach ($newsItem->getItems() as $item) {
+                foreach ($newsItem->getItems() as $key => $item) {
+
+                    if($withSubPosts === false && $itemCount > 1) {
+                        break;
+                    }
 
                     $displayUrl = $item->getDisplayUrl();
 
@@ -121,6 +132,8 @@ class SocialPostBuilder implements SocialPostBuilderInterface
                     if (count($paginationList) === $count) {
                         break 3;
                     }
+
+                    $itemCount++;
                 }
             }
         }
@@ -145,7 +158,6 @@ class SocialPostBuilder implements SocialPostBuilderInterface
      */
     public function filter(FilterData $data): void
     {
-        $options = $data->getOptions();
         $buildConfig = $data->getBuildConfig();
 
         $element = $data->getTransferredData();
@@ -176,7 +188,6 @@ class SocialPostBuilder implements SocialPostBuilderInterface
      */
     public function transform(TransformData $data): void
     {
-        $options = $data->getOptions();
         $buildConfig = $data->getBuildConfig();
 
         $element = $data->getTransferredData();

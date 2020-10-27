@@ -17,7 +17,9 @@ class WeChatFeedType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('count', IntegerType::class);
+        $builder
+            ->add('count', IntegerType::class)
+            ->add('subPosts', CheckboxType::class);
     }
 
     /**
