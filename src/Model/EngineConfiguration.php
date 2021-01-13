@@ -3,8 +3,8 @@
 namespace SocialData\Connector\WeChat\Model;
 
 use Carbon\Carbon;
-use SocialDataBundle\Connector\ConnectorEngineConfigurationInterface;
 use SocialData\Connector\WeChat\Form\Admin\Type\WeChatEngineType;
+use SocialDataBundle\Connector\ConnectorEngineConfigurationInterface;
 
 class EngineConfiguration implements ConnectorEngineConfigurationInterface
 {
@@ -141,5 +141,4 @@ class EngineConfiguration implements ConnectorEngineConfigurationInterface
     {
         return WeChatEngineType::class;
     }
-
 }

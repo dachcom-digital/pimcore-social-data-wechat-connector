@@ -1,10 +1,10 @@
 <?php
 
-namespace SocialData\Connector\WeChat\Storrage;
+namespace SocialData\Connector\WeChat\Storage;
 
 use Carbon\Carbon;
-use Garbetjie\WeChatClient\Authentication\Storage\StorageInterface;
 use Garbetjie\WeChatClient\Authentication\AccessToken;
+use Garbetjie\WeChatClient\Authentication\Storage\StorageInterface;
 use SocialData\Connector\WeChat\Model\EngineConfiguration;
 use SocialDataBundle\Service\ConnectorServiceInterface;
 
@@ -16,7 +16,7 @@ class TokenStorage implements StorageInterface
 
     /**
      * @param ConnectorServiceInterface $connectorService
-     * @param EngineConfiguration $configuration
+     * @param EngineConfiguration       $configuration
      */
     public function __construct(ConnectorServiceInterface $connectorService, EngineConfiguration $configuration)
     {
@@ -48,14 +48,12 @@ class TokenStorage implements StorageInterface
     }
 
     /**
-     * @param string $hash
+     * @param string      $hash
      * @param AccessToken $accessToken
-     *
-     * @return void
      */
     public function store($hash, AccessToken $accessToken)
     {
-        $this->engineConfiguration->setAccessToken((string)$accessToken, true);
+        $this->engineConfiguration->setAccessToken((string) $accessToken, true);
         $this->engineConfiguration->setAccessTokenExpiresAt(Carbon::instance($accessToken->expires()), true);
         $this->engineConfiguration->setHash($hash, true);
 

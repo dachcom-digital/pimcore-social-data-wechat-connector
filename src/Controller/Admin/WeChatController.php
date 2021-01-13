@@ -27,13 +27,13 @@ class WeChatController extends AdminController
     protected $connectorService;
 
     /**
-     * @param WeChatClient $weChatClient
+     * @param WeChatClient              $weChatClient
      * @param ConnectorServiceInterface $connectorService
      */
     public function __construct(
         WeChatClient $weChatClient,
         ConnectorServiceInterface $connectorService
-    ){
+    ) {
         $this->weChatClient = $weChatClient;
         $this->connectorService = $connectorService;
     }

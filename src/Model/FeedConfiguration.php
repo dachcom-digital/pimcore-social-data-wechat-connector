@@ -2,8 +2,8 @@
 
 namespace SocialData\Connector\WeChat\Model;
 
-use SocialDataBundle\Connector\ConnectorFeedConfigurationInterface;
 use SocialData\Connector\WeChat\Form\Admin\Type\WeChatFeedType;
+use SocialDataBundle\Connector\ConnectorFeedConfigurationInterface;
 
 class FeedConfiguration implements ConnectorFeedConfigurationInterface
 {
