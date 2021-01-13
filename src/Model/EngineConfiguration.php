@@ -34,7 +34,7 @@ class EngineConfiguration implements ConnectorEngineConfigurationInterface
     protected $hash;
 
     /**
-     * @param $appId
+     * @param string
      */
     public function setAppId($appId)
     {
@@ -50,7 +50,7 @@ class EngineConfiguration implements ConnectorEngineConfigurationInterface
     }
 
     /**
-     * @param $appSecret
+     * @param string
      */
     public function setAppSecret($appSecret)
     {
