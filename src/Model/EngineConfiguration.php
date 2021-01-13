@@ -34,7 +34,7 @@ class EngineConfiguration implements ConnectorEngineConfigurationInterface
     protected $hash;
 
     /**
-     * @param string
+     * @param string $appId
      */
     public function setAppId($appId)
     {
@@ -50,7 +50,7 @@ class EngineConfiguration implements ConnectorEngineConfigurationInterface
     }
 
     /**
-     * @param string
+     * @param string $appSecret
      */
     public function setAppSecret($appSecret)
     {
@@ -67,7 +67,7 @@ class EngineConfiguration implements ConnectorEngineConfigurationInterface
 
     /**
      * @param string $accessToken
-     * @param bool $forceUpdate
+     * @param bool   $forceUpdate
      */
     public function setAccessToken($accessToken, $forceUpdate = false)
     {
@@ -90,7 +90,7 @@ class EngineConfiguration implements ConnectorEngineConfigurationInterface
 
     /**
      * @param Carbon $expiresAt
-     * @param bool $forceUpdate
+     * @param bool   $forceUpdate
      */
     public function setAccessTokenExpiresAt($expiresAt, $forceUpdate = false)
     {
@@ -113,7 +113,7 @@ class EngineConfiguration implements ConnectorEngineConfigurationInterface
 
     /**
      * @param string $hash
-     * @param bool $forceUpdate
+     * @param bool   $forceUpdate
      */
     public function setHash($hash, $forceUpdate = false)
     {
