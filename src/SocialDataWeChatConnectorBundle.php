@@ -9,7 +9,7 @@ class SocialDataWeChatConnectorBundle extends AbstractPimcoreBundle
 {
     use PackageVersionTrait;
 
-    const PACKAGE_NAME = 'dachcom-digital/social-data-wechat-connector';
+    public const PACKAGE_NAME = 'dachcom-digital/social-data-wechat-connector';
 
     /**
      * {@inheritdoc}

@@ -4,8 +4,8 @@ namespace SocialData\Connector\WeChat\Definition;
 
 use SocialData\Connector\WeChat\Model\EngineConfiguration;
 use SocialData\Connector\WeChat\Model\FeedConfiguration;
-use SocialDataBundle\Connector\ConnectorEngineConfigurationInterface;
 use SocialDataBundle\Connector\ConnectorDefinitionInterface;
+use SocialDataBundle\Connector\ConnectorEngineConfigurationInterface;
 use SocialDataBundle\Connector\SocialPostBuilderInterface;
 use SocialDataBundle\Model\ConnectorEngineInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

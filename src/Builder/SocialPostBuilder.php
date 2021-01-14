@@ -3,25 +3,25 @@
 namespace SocialData\Connector\WeChat\Builder;
 
 use Carbon\Carbon;
-use SocialData\Connector\WeChat\Model\FeedConfiguration;
-use SocialDataBundle\Dto\BuildConfig;
-use SocialData\Connector\WeChat\Model\EngineConfiguration;
+use Garbetjie\WeChatClient\Media;
 use SocialData\Connector\WeChat\Client\WeChatClient;
+use SocialData\Connector\WeChat\Model\EngineConfiguration;
+use SocialData\Connector\WeChat\Model\FeedConfiguration;
 use SocialDataBundle\Connector\SocialPostBuilderInterface;
+use SocialDataBundle\Dto\BuildConfig;
 use SocialDataBundle\Dto\FetchData;
 use SocialDataBundle\Dto\FilterData;
 use SocialDataBundle\Dto\TransformData;
 use SocialDataBundle\Exception\BuildException;
 use SocialDataBundle\Logger\LoggerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Garbetjie\WeChatClient\Media;
 
 class SocialPostBuilder implements SocialPostBuilderInterface
 {
     /**
      * @var int
      */
-    const DEFAULT_COUNT = 20;
+    public const DEFAULT_COUNT = 20;
 
     /**
      * @var WeChatClient
@@ -40,14 +40,13 @@ class SocialPostBuilder implements SocialPostBuilderInterface
     public function __construct(
         WeChatClient $weChatClient,
         LoggerInterface $logger
-    )
-    {
+    ) {
         $this->weChatClient = $weChatClient;
         $this->logger = $logger;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureFetch(BuildConfig $buildConfig, OptionsResolver $resolver): void
     {
@@ -55,7 +54,7 @@ class SocialPostBuilder implements SocialPostBuilderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function fetch(FetchData $data): void
     {
@@ -82,10 +81,9 @@ class SocialPostBuilder implements SocialPostBuilderInterface
             throw new BuildException(sprintf('media service client error: %s', $e->getMessage()));
         }
 
-        $countPagination = (int)ceil($count / self::DEFAULT_COUNT);
+        $countPagination = (int) ceil($count / self::DEFAULT_COUNT);
 
         for ($i = 0; $i < $countPagination; $i++) {
-
             try {
                 $newsMaterial = $mediaService->paginateNews(self::DEFAULT_COUNT * $i, self::DEFAULT_COUNT);
             } catch (\Throwable $e) {
@@ -93,13 +91,11 @@ class SocialPostBuilder implements SocialPostBuilderInterface
             }
 
             foreach ($newsMaterial->getItems() as $newsItem) {
-
                 $itemCount = 1;
 
                 /** @var Media\Paginated\NewsItem $item */
                 foreach ($newsItem->getItems() as $key => $item) {
-
-                    if($withSubPosts === false && $itemCount > 1) {
+                    if ($withSubPosts === false && $itemCount > 1) {
                         break;
                     }
 
@@ -113,6 +109,7 @@ class SocialPostBuilder implements SocialPostBuilderInterface
 
                     if (!isset($params['sn'])) {
                         $this->logger->error('SN field for post not found. skipping...', [$buildConfig->getFeed()]);
+
                         continue;
                     }
 
@@ -125,7 +122,7 @@ class SocialPostBuilder implements SocialPostBuilderInterface
 
                     $paginationList[$itemId] = [
                         'item' => $item,
-                        'id' => $itemId,
+                        'id'   => $itemId,
                         'date' => $newsItem->getUpdatedDate()
                     ];
 
@@ -146,7 +143,7 @@ class SocialPostBuilder implements SocialPostBuilderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureFilter(BuildConfig $buildConfig, OptionsResolver $resolver): void
     {
@@ -154,7 +151,7 @@ class SocialPostBuilder implements SocialPostBuilderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function filter(FilterData $data): void
     {
@@ -176,7 +173,7 @@ class SocialPostBuilder implements SocialPostBuilderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configureTransform(BuildConfig $buildConfig, OptionsResolver $resolver): void
     {
@@ -184,7 +181,7 @@ class SocialPostBuilder implements SocialPostBuilderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function transform(TransformData $data): void
     {
@@ -192,7 +189,6 @@ class SocialPostBuilder implements SocialPostBuilderInterface
 
         $element = $data->getTransferredData();
         $socialPost = $data->getSocialPostEntity();
-
 
         $engineConfiguration = $buildConfig->getEngineConfiguration();
         if (!$engineConfiguration instanceof EngineConfiguration) {
@@ -203,7 +199,7 @@ class SocialPostBuilder implements SocialPostBuilderInterface
         if (!$feedConfiguration instanceof FeedConfiguration) {
             return;
         }
-        
+
         if ($element['date'] instanceof \DateTimeImmutable) {
             try {
                 $creationTime = new Carbon($element['date']);
