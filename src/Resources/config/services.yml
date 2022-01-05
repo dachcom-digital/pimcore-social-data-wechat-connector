@@ -36,5 +36,4 @@ services:
     ## Controller
 
     SocialData\Connector\WeChat\Controller\Admin\WeChatController:
-        calls:
-            - [setContainer, ['@service_container']]
+        tags: [ 'controller.service_arguments' ]

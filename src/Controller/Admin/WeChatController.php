@@ -7,7 +7,6 @@ use SocialData\Connector\WeChat\Client\WeChatClient;
 use SocialData\Connector\WeChat\Model\EngineConfiguration;
 use SocialDataBundle\Controller\Admin\Traits\ConnectResponseTrait;
 use SocialDataBundle\Service\ConnectorServiceInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -16,20 +15,9 @@ class WeChatController extends AdminController
 {
     use ConnectResponseTrait;
 
-    /**
-     * @var WeChatClient
-     */
-    protected $weChatClient;
+    protected WeChatClient $weChatClient;
+    protected ConnectorServiceInterface $connectorService;
 
-    /**
-     * @var ConnectorServiceInterface
-     */
-    protected $connectorService;
-
-    /**
-     * @param WeChatClient              $weChatClient
-     * @param ConnectorServiceInterface $connectorService
-     */
     public function __construct(
         WeChatClient $weChatClient,
         ConnectorServiceInterface $connectorService
@@ -38,12 +26,7 @@ class WeChatController extends AdminController
         $this->connectorService = $connectorService;
     }
 
-    /**
-     * @param Request $request
-     *
-     * @return RedirectResponse|Response
-     */
-    public function connectAction(Request $request)
+    public function connectAction(Request $request): Response
     {
         try {
             $connectorEngineConfig = $this->getConnectorEngineConfig();
@@ -60,10 +43,7 @@ class WeChatController extends AdminController
         return $this->buildConnectSuccessResponse();
     }
 
-    /**
-     * @return EngineConfiguration
-     */
-    protected function getConnectorEngineConfig()
+    protected function getConnectorEngineConfig(): EngineConfiguration
     {
         $connectorDefinition = $this->connectorService->getConnectorDefinition('wechat', true);
 

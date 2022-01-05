@@ -38,7 +38,7 @@ class AppKernel extends Kernel
 
 ### III. Install Assets
 ```bash
-bin/console assets:install web --relative --symlink
+bin/console assets:install public --relative --symlink
 ```
 
 ## Third-Party Requirements

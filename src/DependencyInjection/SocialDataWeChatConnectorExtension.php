@@ -10,12 +10,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class SocialDataWeChatConnectorExtension extends Extension
 {
     /**
-     * @param array            $configs
-     * @param ContainerBuilder $container
-     *
      * @throws \Exception
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $this->processConfiguration($configuration, $configs);

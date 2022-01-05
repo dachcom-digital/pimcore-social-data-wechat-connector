@@ -33,18 +33,9 @@
     "autoload-dev": {
         "psr-4": {
             "": "src/"
-        },
-        "classmap": [
-            "app/TestKernel.php"
-        ]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.0-dev"
         }
     },
     "require": {
-        "dachcom-digital/social-data": "^1.0",
         "garbetjie/wechat": "^0.10.3"
     },
     "require-dev": {

@@ -11,28 +11,17 @@ use SocialDataBundle\Service\ConnectorServiceInterface;
 
 class WeChatClient
 {
-    /**
-     * @var ConnectorServiceInterface
-     */
-    protected $connectorService;
+    protected ConnectorServiceInterface $connectorService;
 
-    /**
-     * @param ConnectorServiceInterface $connectorService
-     */
-    public function __construct(
-        ConnectorServiceInterface $connectorService)
+    public function __construct(ConnectorServiceInterface $connectorService)
     {
         $this->connectorService = $connectorService;
     }
 
     /**
-     * @param EngineConfiguration $configuration
-     *
-     * @return Client
-     *
      * @throws Authentication\Exception
      */
-    public function getAuthenticatedClient(EngineConfiguration $configuration)
+    public function getAuthenticatedClient(EngineConfiguration $configuration): Client
     {
         $client = new Client();
         $storage = new TokenStorage($this->connectorService, $configuration);
@@ -54,13 +43,9 @@ class WeChatClient
     }
 
     /**
-     * @param EngineConfiguration $configuration
-     *
-     * @return Media\Service
-     *
      * @throws Authentication\Exception
      */
-    public function getMediaServiceClient(EngineConfiguration $configuration)
+    public function getMediaServiceClient(EngineConfiguration $configuration): Media\Service
     {
         $client = $this->getAuthenticatedClient($configuration);
 

@@ -10,20 +10,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WeChatEngineType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('appId', TextType::class);
         $builder->add('appSecret', TextType::class);
-//        $builder->add('accessToken', TextType::class); todo: ?? https://github.com/garbetjie/wechat-php#caching-access-tokens
+        // $builder->add('accessToken', TextType::class); todo: ?? https://github.com/garbetjie/wechat-php#caching-access-tokens
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'csrf_protection' => false,

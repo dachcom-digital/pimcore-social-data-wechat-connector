@@ -18,44 +18,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SocialPostBuilder implements SocialPostBuilderInterface
 {
-    /**
-     * @var int
-     */
     public const DEFAULT_COUNT = 20;
 
-    /**
-     * @var WeChatClient
-     */
-    protected $weChatClient;
+    protected WeChatClient $weChatClient;
+    protected LoggerInterface $logger;
 
-    /**
-     * @var LoggerInterface
-     */
-    protected $logger;
-
-    /**
-     * @param WeChatClient    $weChatClient
-     * @param LoggerInterface $logger
-     */
-    public function __construct(
-        WeChatClient $weChatClient,
-        LoggerInterface $logger
-    ) {
+    public function __construct(WeChatClient $weChatClient, LoggerInterface $logger)
+    {
         $this->weChatClient = $weChatClient;
         $this->logger = $logger;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureFetch(BuildConfig $buildConfig, OptionsResolver $resolver): void
     {
         // nothing to configure so far.
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function fetch(FetchData $data): void
     {
         $buildConfig = $data->getBuildConfig();
@@ -142,17 +120,11 @@ class SocialPostBuilder implements SocialPostBuilderInterface
         $data->setFetchedEntities($paginationList);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureFilter(BuildConfig $buildConfig, OptionsResolver $resolver): void
     {
         // nothing to configure so far.
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function filter(FilterData $data): void
     {
         $buildConfig = $data->getBuildConfig();
@@ -172,17 +144,11 @@ class SocialPostBuilder implements SocialPostBuilderInterface
         $data->setFilteredId($element['id']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureTransform(BuildConfig $buildConfig, OptionsResolver $resolver): void
     {
         // nothing to configure so far.
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transform(TransformData $data): void
     {
         $buildConfig = $data->getBuildConfig();

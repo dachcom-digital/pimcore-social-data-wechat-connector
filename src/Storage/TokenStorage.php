@@ -10,35 +10,21 @@ use SocialDataBundle\Service\ConnectorServiceInterface;
 
 class TokenStorage implements StorageInterface
 {
-    protected $connectorService;
+    protected ConnectorServiceInterface $connectorService;
+    protected EngineConfiguration $engineConfiguration;
 
-    protected $engineConfiguration;
-
-    /**
-     * @param ConnectorServiceInterface $connectorService
-     * @param EngineConfiguration       $configuration
-     */
     public function __construct(ConnectorServiceInterface $connectorService, EngineConfiguration $configuration)
     {
         $this->connectorService = $connectorService;
         $this->engineConfiguration = $configuration;
     }
 
-    /**
-     * @param string $appId
-     * @param string $secretKey
-     *
-     * @return string
-     */
-    public function hash($appId, $secretKey)
+    public function hash(string $appId, string $secretKey): string
     {
         return hash('sha256', $appId . $secretKey);
     }
 
-    /**
-     * @return AccessToken|null
-     */
-    public function retrieve($hash)
+    public function retrieve($hash): ?AccessToken
     {
         if ($this->engineConfiguration->getHash() !== $hash) {
             return null;
@@ -47,11 +33,7 @@ class TokenStorage implements StorageInterface
         return new AccessToken($this->engineConfiguration->getAccessToken(), $this->engineConfiguration->getAccessTokenExpiresAt());
     }
 
-    /**
-     * @param string      $hash
-     * @param AccessToken $accessToken
-     */
-    public function store($hash, AccessToken $accessToken)
+    public function store(string $hash, AccessToken $accessToken): void
     {
         $this->engineConfiguration->setAccessToken((string) $accessToken, true);
         $this->engineConfiguration->setAccessTokenExpiresAt(Carbon::instance($accessToken->expires()), true);
