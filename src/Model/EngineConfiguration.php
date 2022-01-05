@@ -8,70 +8,34 @@ use SocialDataBundle\Connector\ConnectorEngineConfigurationInterface;
 
 class EngineConfiguration implements ConnectorEngineConfigurationInterface
 {
-    /**
-     * @var string
-     */
-    protected $appId;
+    protected ?string $appId = null;
+    protected ?string $appSecret = null;
+    protected ?string $accessToken = null;
+    protected ?Carbon $expiresAt = null;
 
-    /**
-     * @var string
-     */
-    protected $appSecret;
-
-    /**
-     * @var string
-     */
-    protected $accessToken;
-
-    /**
-     * @var Carbon
-     */
-    protected $expiresAt;
-
-    /**
-     * @var string
-     */
-    protected $hash;
-
-    /**
-     * @param string $appId
-     */
-    public function setAppId($appId)
+    public function setAppId(string $appId): void
     {
         $this->appId = $appId;
     }
 
-    /**
-     * @return string
-     */
-    public function getAppId()
+    public function getAppId(): ?string
     {
         return $this->appId;
     }
 
-    /**
-     * @param string $appSecret
-     */
-    public function setAppSecret($appSecret)
+    public function setAppSecret(string $appSecret): void
     {
         $this->appSecret = $appSecret;
     }
 
-    /**
-     * @return string
-     */
-    public function getAppSecret()
+    public function getAppSecret(): ?string
     {
         return $this->appSecret;
     }
 
-    /**
-     * @param string $accessToken
-     * @param bool   $forceUpdate
-     */
-    public function setAccessToken($accessToken, $forceUpdate = false)
+    public function setAccessToken(?string $accessToken, $forceUpdate = false): void
     {
-        // symfony: if there are any fields on the form that aren’t included in the submitted data,
+        // symfony: if there are any fields on the form that are not included in the submitted data,
         // those fields will be explicitly set to null.
         if ($accessToken === null && $forceUpdate === false) {
             return;
@@ -80,21 +44,14 @@ class EngineConfiguration implements ConnectorEngineConfigurationInterface
         $this->accessToken = $accessToken;
     }
 
-    /**
-     * @return string
-     */
-    public function getAccessToken()
+    public function getAccessToken(): ?string
     {
         return $this->accessToken;
     }
 
-    /**
-     * @param Carbon $expiresAt
-     * @param bool   $forceUpdate
-     */
-    public function setAccessTokenExpiresAt($expiresAt, $forceUpdate = false)
+    public function setAccessTokenExpiresAt(?Carbon $expiresAt, bool $forceUpdate = false): void
     {
-        // symfony: if there are any fields on the form that aren’t included in the submitted data,
+        // symfony: if there are any fields on the form that are not included in the submitted data,
         // those fields will be explicitly set to null.
         if ($expiresAt === null && $forceUpdate === false) {
             return;
@@ -103,41 +60,12 @@ class EngineConfiguration implements ConnectorEngineConfigurationInterface
         $this->expiresAt = $expiresAt;
     }
 
-    /**
-     * @return Carbon
-     */
-    public function getAccessTokenExpiresAt()
+    public function getAccessTokenExpiresAt(): ?Carbon
     {
         return $this->expiresAt;
     }
 
-    /**
-     * @param string $hash
-     * @param bool   $forceUpdate
-     */
-    public function setHash($hash, $forceUpdate = false)
-    {
-        // symfony: if there are any fields on the form that aren’t included in the submitted data,
-        // those fields will be explicitly set to null.
-        if ($hash === null && $forceUpdate === false) {
-            return;
-        }
-
-        $this->hash = $hash;
-    }
-
-    /**
-     * @return string
-     */
-    public function getHash()
-    {
-        return $this->hash;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getFormClass()
+    public static function getFormClass(): string
     {
         return WeChatEngineType::class;
     }

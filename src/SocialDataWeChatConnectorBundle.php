@@ -11,28 +11,19 @@ class SocialDataWeChatConnectorBundle extends AbstractPimcoreBundle
 
     public const PACKAGE_NAME = 'dachcom-digital/social-data-wechat-connector';
 
-    /**
-     * {@inheritdoc}
-     */
     protected function getComposerPackageName(): string
     {
         return self::PACKAGE_NAME;
     }
 
-    /**
-     * @return array
-     */
-    public function getCssPaths()
+    public function getCssPaths(): array
     {
         return [
             '/bundles/socialdatawechatconnector/css/admin.css'
         ];
     }
 
-    /**
-     * @return string[]
-     */
-    public function getJsPaths()
+    public function getJsPaths(): array
     {
         return [
             '/bundles/socialdatawechatconnector/js/connector/wechat-connector.js',

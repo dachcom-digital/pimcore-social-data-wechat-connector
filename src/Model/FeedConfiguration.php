@@ -7,52 +7,30 @@ use SocialDataBundle\Connector\ConnectorFeedConfigurationInterface;
 
 class FeedConfiguration implements ConnectorFeedConfigurationInterface
 {
-    /**
-     * @var int|null
-     */
-    protected $count;
+    protected ?int $count = null;
+    protected ?bool $subPosts = null;
 
-    /**
-     * @var bool|null
-     */
-    protected $subPosts;
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getFormClass()
+    public static function getFormClass(): string
     {
         return WeChatFeedType::class;
     }
 
-    /**
-     * @param int|null $count
-     */
-    public function setCount(?int $count)
+    public function setCount(?int $count): void
     {
         $this->count = $count;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getCount()
+    public function getCount(): ?int
     {
         return $this->count;
     }
 
-    /**
-     * @param bool|null $subPosts
-     */
-    public function setSubPosts(?bool $subPosts)
+    public function setSubPosts(?bool $subPosts): void
     {
         $this->subPosts = $subPosts;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getSubPosts()
+    public function getSubPosts(): ?bool
     {
         return $this->subPosts;
     }

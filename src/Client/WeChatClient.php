@@ -2,68 +2,77 @@
 
 namespace SocialData\Connector\WeChat\Client;
 
-use Garbetjie\WeChatClient\Authentication;
-use Garbetjie\WeChatClient\Client;
-use Garbetjie\WeChatClient\Media;
+use Carbon\Carbon;
+use EasyWeChat\Factory;
+use EasyWeChat\OfficialAccount\Application;
+use EasyWeChat\OfficialAccount\Material\Client;
 use SocialData\Connector\WeChat\Model\EngineConfiguration;
-use SocialData\Connector\WeChat\Storage\TokenStorage;
 use SocialDataBundle\Service\ConnectorServiceInterface;
 
 class WeChatClient
 {
-    /**
-     * @var ConnectorServiceInterface
-     */
-    protected $connectorService;
+    protected ConnectorServiceInterface $connectorService;
 
-    /**
-     * @param ConnectorServiceInterface $connectorService
-     */
-    public function __construct(
-        ConnectorServiceInterface $connectorService)
+    public function __construct(ConnectorServiceInterface $connectorService)
     {
         $this->connectorService = $connectorService;
     }
 
     /**
-     * @param EngineConfiguration $configuration
-     *
-     * @return Client
-     *
-     * @throws Authentication\Exception
+     * @throws \Exception
      */
-    public function getAuthenticatedClient(EngineConfiguration $configuration)
+    public function buildWeChatApplication(EngineConfiguration $configuration, bool $forceTokenGeneration = false): Application
     {
-        $client = new Client();
-        $storage = new TokenStorage($this->connectorService, $configuration);
-        $authService = new Authentication\Service($client);
+        $options = [
+            'app_id' => $configuration->getAppId(),
+            'secret' => $configuration->getAppSecret(),
+            'token'  => 'pimcore-social-data-wechat',
+            'log' => [
+                'level' => 'emergency',
+                'file'  => PIMCORE_PRIVATE_VAR . '/log/social-data-wechat.log',
+            ]
+        ];
 
-        $appID = $configuration->getAppId();
-        $secret = $configuration->getAppSecret();
+        $app = Factory::officialAccount($options);
 
-        /*
-         * @see https://github.com/garbetjie/wechat-php/issues/12
-         */
-        $authenticatedClientOrToken = $authService->authenticate($appID, $secret, $storage);
+        $this->validateToken($configuration, $app, $forceTokenGeneration);
 
-        if ($authenticatedClientOrToken instanceof Authentication\AccessToken) {
-            return $client->withAccessToken($authenticatedClientOrToken);
-        }
-
-        return $authenticatedClientOrToken;
+        return $app;
     }
 
     /**
-     * @param EngineConfiguration $configuration
-     *
-     * @return Media\Service
-     *
-     * @throws Authentication\Exception
+     * @throws \Exception
      */
-    public function getMediaServiceClient(EngineConfiguration $configuration)
+    public function buildWeChatMaterialClient(EngineConfiguration $configuration): Client
     {
-        $client = $this->getAuthenticatedClient($configuration);
-
-        return new Media\Service($client);
+        return $this->buildWeChatApplication($configuration)->material;
     }
+
+    /**
+     * @throws \Exception
+     */
+    protected function validateToken(EngineConfiguration $configuration, Application $app, bool $forceTokenGeneration = false): void
+    {
+        $refresh = empty($configuration->getAccessToken());
+
+        if ($configuration->getAccessTokenExpiresAt() instanceof Carbon && $configuration->getAccessTokenExpiresAt()->isPast()) {
+            $refresh = true;
+        }
+
+        if ($forceTokenGeneration === false && $refresh === false) {
+            return;
+        }
+
+        $token = $app->access_token->getToken(!empty($configuration->getAccessToken()));
+
+        if (!is_array($token)) {
+            return;
+        }
+
+        $configuration->setAccessToken($token['access_token'], true);
+        $configuration->setAccessTokenExpiresAt(Carbon::createFromTimestamp(time() + $token['expires_in']), true);
+
+        $this->connectorService->updateConnectorEngineConfiguration('wechat', $configuration);
+    }
+
 }
