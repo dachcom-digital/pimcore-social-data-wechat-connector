@@ -12,7 +12,6 @@ class EngineConfiguration implements ConnectorEngineConfigurationInterface
     protected ?string $appSecret = null;
     protected ?string $accessToken = null;
     protected ?Carbon $expiresAt = null;
-    protected ?string $hash = null;
 
     public function setAppId(string $appId): void
     {
@@ -64,22 +63,6 @@ class EngineConfiguration implements ConnectorEngineConfigurationInterface
     public function getAccessTokenExpiresAt(): ?Carbon
     {
         return $this->expiresAt;
-    }
-
-    public function setHash(?string $hash, bool $forceUpdate = false): void
-    {
-        // symfony: if there are any fields on the form that are not included in the submitted data,
-        // those fields will be explicitly set to null.
-        if ($hash === null && $forceUpdate === false) {
-            return;
-        }
-
-        $this->hash = $hash;
-    }
-
-    public function getHash(): ?string
-    {
-        return $this->hash;
     }
 
     public static function getFormClass(): string

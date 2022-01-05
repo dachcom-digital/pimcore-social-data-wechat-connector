@@ -14,7 +14,6 @@ class WeChatEngineType extends AbstractType
     {
         $builder->add('appId', TextType::class);
         $builder->add('appSecret', TextType::class);
-        // $builder->add('accessToken', TextType::class); todo: ?? https://github.com/garbetjie/wechat-php#caching-access-tokens
     }
 
     public function configureOptions(OptionsResolver $resolver): void

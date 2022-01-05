@@ -35,7 +35,7 @@ class WeChatController extends AdminController
         }
 
         try {
-            $this->weChatClient->getAuthenticatedClient($connectorEngineConfig);
+            $this->weChatClient->buildWeChatApplication($connectorEngineConfig, true);
         } catch (\Throwable $e) {
             return $this->buildConnectErrorResponse(500, 'general_error', 'connector authenticate error', $e->getMessage());
         }

@@ -36,7 +36,7 @@
         }
     },
     "require": {
-        "garbetjie/wechat": "^0.10.3"
+        "overtrue/wechat": "^5.0"
     },
     "require-dev": {
         "codeception/codeception": "~2.4.0",
