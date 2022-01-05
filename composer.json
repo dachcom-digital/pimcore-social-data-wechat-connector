@@ -36,7 +36,8 @@
         }
     },
     "require": {
-        "overtrue/wechat": "^5.0"
+        "overtrue/wechat": "^5.0",
+        "dachcom-digital/social-data": "^2.0"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
