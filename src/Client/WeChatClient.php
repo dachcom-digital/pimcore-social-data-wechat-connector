@@ -4,7 +4,7 @@ namespace SocialData\Connector\WeChat\Client;
 
 use Garbetjie\WeChatClient\Authentication;
 use Garbetjie\WeChatClient\Client;
-use Garbetjie\WeChatClient\Media;
+use SocialData\Connector\WeChat\FreePublish\Service;
 use SocialData\Connector\WeChat\Model\EngineConfiguration;
 use SocialData\Connector\WeChat\Storage\TokenStorage;
 use SocialDataBundle\Service\ConnectorServiceInterface;
@@ -53,17 +53,11 @@ class WeChatClient
         return $authenticatedClientOrToken;
     }
 
-    /**
-     * @param EngineConfiguration $configuration
-     *
-     * @return Media\Service
-     *
-     * @throws Authentication\Exception
-     */
-    public function getMediaServiceClient(EngineConfiguration $configuration)
+    public function getFreepublishServiceClient(EngineConfiguration $configuration)
     {
         $client = $this->getAuthenticatedClient($configuration);
 
-        return new Media\Service($client);
+        return new Service($client);
     }
+
 }
