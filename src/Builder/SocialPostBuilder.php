@@ -76,62 +76,52 @@ class SocialPostBuilder implements SocialPostBuilderInterface
         $withSubPosts = $feedConfiguration->getSubPosts();
 
         try {
-            $mediaService = $this->weChatClient->getMediaServiceClient($engineConfiguration);
+            $freePublishService = $this->weChatClient->getFreepublishServiceClient($engineConfiguration);
+
         } catch (\Throwable $e) {
             throw new BuildException(sprintf('media service client error: %s', $e->getMessage()));
         }
 
-        $countPagination = (int) ceil($count / self::DEFAULT_COUNT);
+        $countPagination = (int)ceil($count / self::DEFAULT_COUNT);
 
         for ($i = 0; $i < $countPagination; $i++) {
             try {
-                $newsMaterial = $mediaService->paginateNews(self::DEFAULT_COUNT * $i, self::DEFAULT_COUNT);
+                $freePublished = $freePublishService->paginateFreePublish(self::DEFAULT_COUNT * $i, self::DEFAULT_COUNT);
             } catch (\Throwable $e) {
                 throw new BuildException(sprintf('error while fetching paginated news: %s', $e->getMessage()));
             }
 
-            foreach ($newsMaterial->getItems() as $newsItem) {
+            foreach ($freePublished->item as $newsItem) {
+                $itemId = $newsItem->article_id;
+                $content = $newsItem->content;
+
+                if (!$content->news_item) {
+                    continue;
+                }
+
+                $newsContents = $content->news_item;
+                $createTime = $content->create_time;
                 $itemCount = 1;
 
-                /** @var Media\Paginated\NewsItem $item */
-                foreach ($newsItem->getItems() as $key => $item) {
+                foreach ($newsContents as $newsContent) {
                     if ($withSubPosts === false && $itemCount > 1) {
                         break;
                     }
 
-                    $displayUrl = $item->getDisplayUrl();
-
-                    if (empty($displayUrl)) {
-                        continue;
-                    }
-
-                    parse_str(parse_url($displayUrl, PHP_URL_QUERY), $params);
-
-                    if (!isset($params['sn'])) {
-                        $this->logger->error('SN field for post not found. skipping...', [$buildConfig->getFeed()]);
-
-                        continue;
-                    }
-
-                    $itemId = $params['sn'];
-
-                    // already added
-                    if (isset($paginationList[$itemId])) {
-                        continue;
-                    }
-
                     $paginationList[$itemId] = [
-                        'item' => $item,
+                        'item' => $newsContent,
                         'id'   => $itemId,
-                        'date' => $newsItem->getUpdatedDate()
+                        'date' => $createTime
                     ];
+
+                    $itemCount++;
 
                     if (count($paginationList) === $count) {
                         break 3;
                     }
 
-                    $itemCount++;
                 }
+
             }
         }
 
@@ -200,26 +190,19 @@ class SocialPostBuilder implements SocialPostBuilderInterface
             return;
         }
 
-        if ($element['date'] instanceof \DateTimeImmutable) {
-            try {
-                $creationTime = new Carbon($element['date']);
-            } catch (\Exception $e) {
-                $creationTime = Carbon::now();
-            }
-        } else {
+        try {
+            $creationTime = new Carbon($element['date']);
+        } catch (\Exception $e) {
             $creationTime = Carbon::now();
         }
 
         $newsItem = $element['item'];
-        if (!$newsItem instanceof Media\Downloaded\NewsItem) {
-            return;
-        }
 
         $socialPost->setSocialCreationDate($creationTime);
-        $socialPost->setTitle($newsItem->getTitle());
-        $socialPost->setContent($newsItem->getSummary());
-        $socialPost->setUrl($newsItem->getDisplayURL());
-        $socialPost->setPosterUrl($newsItem->getThumbnailURL());
+        $socialPost->setTitle($newsItem->title);
+        $socialPost->setContent($newsItem->digest);
+        $socialPost->setUrl($newsItem->url);
+        $socialPost->setPosterUrl($newsItem->thumb_url);
 
         $data->setTransformedElement($socialPost);
     }
