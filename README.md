@@ -2,8 +2,8 @@
 
 [![Software License](https://img.shields.io/badge/license-GPLv3-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Latest Release](https://img.shields.io/packagist/v/dachcom-digital/social-data-wechat-connector.svg?style=flat-square)](https://packagist.org/packages/dachcom-digital/social-data-wechat-connector)
-[![Tests](https://img.shields.io/github/workflow/status/dachcom-digital/pimcore-social-data-wechat-connector/Codeception/master?style=flat-square&logo=github&label=codeception)](https://github.com/dachcom-digital/pimcore-social-data-wechat-connector/actions?query=workflow%3ACodeception+branch%3Amaster)
-[![PhpStan](https://img.shields.io/github/workflow/status/dachcom-digital/pimcore-social-data-wechat-connector/PHP%20Stan/master?style=flat-square&logo=github&label=phpstan%20level%204)](https://github.com/dachcom-digital/pimcore-social-data-wechat-connector/actions?query=workflow%3A"PHP+Stan"+branch%3Amaster)
+[![Tests](https://img.shields.io/github/actions/workflow/status/dachcom-digital/pimcore-social-data-wechat-connector/.github/workflows/codeception.yml?branch=master&style=flat-square&logo=github&label=codeception)](https://github.com/dachcom-digital/pimcore-social-data-wechat-connector/actions?query=workflow%3ACodeception+branch%3Amaster)
+[![PhpStan](https://img.shields.io/github/actions/workflow/status/dachcom-digital/pimcore-social-data-wechat-connector/.github/workflows/php-stan.yml?branch=master&style=flat-square&logo=github&label=phpstan%20level%204)](https://github.com/dachcom-digital/pimcore-social-data-wechat-connector/actions?query=workflow%3A"PHP+Stan"+branch%3Amaster)
 
 This Connector allows you to fetch social posts from WeChat. 
 
@@ -12,7 +12,7 @@ This Connector allows you to fetch social posts from WeChat.
 ### Release Plan
 | Release | Supported Pimcore Versions | Supported Symfony Versions | Release Date | Maintained     | Branch                                                                                  |
 |---------|----------------------------|----------------------------|--------------|----------------|-----------------------------------------------------------------------------------------|
-| **2.x** | `10.1` - `10.5`            | `5.4`                      | 05.01.2022   | Feature Branch | master                                                                                  |
+| **2.x** | `10.1` - `10.6`            | `5.4`                      | 05.01.2022   | Feature Branch | master                                                                                  |
 | **1.x** | `6.0` - `6.9`              | `3.4`, `^4.4`              | 22.10.2020   | Unsupported    | [1.x](https://github.com/dachcom-digital/pimcore-social-data-wechat-connector/tree/1.x) |
 
 ## Installation
