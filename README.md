@@ -12,36 +12,27 @@ This Connector allows you to fetch social posts from WeChat.
 ### Release Plan
 | Release | Supported Pimcore Versions | Supported Symfony Versions | Release Date | Maintained     | Branch                                                                                  |
 |---------|----------------------------|----------------------------|--------------|----------------|-----------------------------------------------------------------------------------------|
-| **2.x** | `10.1` - `10.6`            | `5.4`                      | 05.01.2022   | Feature Branch | master                                                                                  |
+| **3.x** | `11.0`                     | `6.2`                      | --           | Feature Branch | master                                                                                  |
+| **2.x** | `10.1` - `10.6`            | `5.4`                      | 05.01.2022   | Unsupported    | [2.x](https://github.com/dachcom-digital/pimcore-social-data-wechat-connector/tree/2.x) |
 | **1.x** | `6.0` - `6.9`              | `3.4`, `^4.4`              | 22.10.2020   | Unsupported    | [1.x](https://github.com/dachcom-digital/pimcore-social-data-wechat-connector/tree/1.x) |
 
 ## Installation
 
-### I. Add Dependencies
 ```json
 "require" : {
-    "dachcom-digital/social-data" : "~2.0.0",
-    "dachcom-digital/social-data-wechat-connector" : "~2.0.0"
+    "dachcom-digital/social-data" : "~3.0.0",
+    "dachcom-digital/social-data-wechat-connector" : "~3.0.0"
 }
 ```
 
-### II. Register Connector Bundle
+Add Bundle to `bundles.php`:
 ```php
-// src/Kernel.php
-namespace App;
-
-use Pimcore\HttpKernel\BundleCollection\BundleCollection;
-
-class Kernel extends \Pimcore\Kernel
-{
-    public function registerBundlesToCollection(BundleCollection $collection)
-    {
-        $collection->addBundle(new SocialData\Connector\WeChat\SocialDataWeChatConnectorBundle());
-    }
-}
+return [
+    SocialData\Connector\WeChat\SocialDataWeChatConnectorBundle::class => ['all' => true],
+];
 ```
 
-### III. Install Assets
+### Install Assets
 ```bash
 bin/console assets:install public --relative --symlink
 ```
@@ -74,8 +65,8 @@ Otherwise, you'll receive an error message. You may then need to repeat the conn
 
 ## Feed Configuration
 
-| Name | Description
-|------|----------------------|
+| Name    | Description                                                     |
+|---------|-----------------------------------------------------------------|
 | `Count` | Define a limit to restrict the amount of social posts to import |
 
 ## Third-Party Requirements
