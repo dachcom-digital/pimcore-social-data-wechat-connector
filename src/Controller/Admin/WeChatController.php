@@ -2,7 +2,7 @@
 
 namespace SocialData\Connector\WeChat\Controller\Admin;
 
-use Pimcore\Bundle\AdminBundle\Controller\AdminController;
+use Pimcore\Bundle\AdminBundle\Controller\AdminAbstractController;
 use SocialData\Connector\WeChat\Client\WeChatClient;
 use SocialData\Connector\WeChat\Model\EngineConfiguration;
 use SocialDataBundle\Controller\Admin\Traits\ConnectResponseTrait;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class WeChatController extends AdminController
+class WeChatController extends AdminAbstractController
 {
     use ConnectResponseTrait;
 

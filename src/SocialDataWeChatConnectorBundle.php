@@ -2,32 +2,22 @@
 
 namespace SocialData\Connector\WeChat;
 
-use Pimcore\Extension\Bundle\AbstractPimcoreBundle;
 use Pimcore\Extension\Bundle\Traits\PackageVersionTrait;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SocialDataWeChatConnectorBundle extends AbstractPimcoreBundle
+class SocialDataWeChatConnectorBundle extends Bundle
 {
     use PackageVersionTrait;
 
     public const PACKAGE_NAME = 'dachcom-digital/social-data-wechat-connector';
 
+    public function getPath(): string
+    {
+        return \dirname(__DIR__);
+    }
+
     protected function getComposerPackageName(): string
     {
         return self::PACKAGE_NAME;
-    }
-
-    public function getCssPaths(): array
-    {
-        return [
-            '/bundles/socialdatawechatconnector/css/admin.css'
-        ];
-    }
-
-    public function getJsPaths(): array
-    {
-        return [
-            '/bundles/socialdatawechatconnector/js/connector/wechat-connector.js',
-            '/bundles/socialdatawechatconnector/js/feed/wechat-feed.js',
-        ];
     }
 }
