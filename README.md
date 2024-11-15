@@ -7,6 +7,9 @@
 
 This Connector allows you to fetch social posts from WeChat. 
 
+> [!CAUTION]  
+> This Connector has reached its end of life and only receives compatibility update. It will not be developed further.
+
 ![Image](https://user-images.githubusercontent.com/7426193/97338536-c9c65c00-1881-11eb-9844-a6d83f3dba3f.png)
 
 ### Release Plan
@@ -73,8 +76,11 @@ Otherwise, you'll receive an error message. You may then need to repeat the conn
 To use this connector, this bundle requires some additional packages:
 - [overtrue/wechat](https://github.com/overtrue/wechat)
 
-## Copyright and license
-Copyright: [DACHCOM.DIGITAL](http://dachcom-digital.ch)  
+## License
+**DACHCOM.DIGITAL AG**, Löwenhofstrasse 15, 9424 Rheineck, Schweiz  
+[dachcom.com](https://www.dachcom.com), dcdi@dachcom.ch  
+Copyright © 2024 DACHCOM.DIGITAL. All rights reserved.  
+
 For licensing details please visit [LICENSE.md](LICENSE.md)  
 
 ## Upgrade Info
