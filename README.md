@@ -1,5 +1,21 @@
 # Pimcore Social Data - WeChat Connector
 
+***
+
+> [!IMPORTANT]
+> This bundle will **not** be compatible with Pimcore 12 or any future Pimcore versions.
+>
+> For all future development, updates, and documentation, please refer to [opendxp.io](https://www.opendxp.io):
+>
+> - Access the latest info here: [https://www.opendxp.io/en/bundles](https://www.opendxp.io/en/bundles)  
+> - Migration of Dachcom Digital Bundles: [https://www.opendxp.io/en/dachcom-bundles](https://www.opendxp.io/en/dachcom-bundles)
+>
+> **Note:** We are open to partnerships for those interested in porting this bundle to future versions.
+> 
+> For inquiries, please contact: dcdi@dachcom.ch
+
+***
+
 [![Software License](https://img.shields.io/badge/license-GPLv3-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Latest Release](https://img.shields.io/packagist/v/dachcom-digital/social-data-wechat-connector.svg?style=flat-square)](https://packagist.org/packages/dachcom-digital/social-data-wechat-connector)
 [![Tests](https://img.shields.io/github/actions/workflow/status/dachcom-digital/pimcore-social-data-wechat-connector/.github/workflows/codeception.yml?branch=master&style=flat-square&logo=github&label=codeception)](https://github.com/dachcom-digital/pimcore-social-data-wechat-connector/actions?query=workflow%3ACodeception+branch%3Amaster)
